@@ -125,4 +125,14 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays "A Frai do Vale" page.
+     *
+     * @return string
+     */
+    public function actionSobre()
+    {
+        return $this->render('sobre');
+    }
 }

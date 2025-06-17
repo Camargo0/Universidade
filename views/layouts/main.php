@@ -20,6 +20,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <style>
@@ -49,6 +51,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             color: #333;
             font-weight: 500;
             font-size: 14px;
+            transition: 0.3s;
         }
         .menu a:hover {
             color: #e86916;
@@ -66,6 +69,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             cursor: pointer;
             font-size: 13px;
             text-decoration: none;
+            transition: 0.3s;
         }
         .btn-prof {
             background: linear-gradient(to right, #f7931e, #f15a24);
@@ -78,6 +82,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         }
         .btn-aluno:hover {
             background-color: #0088aa;
+        }
+        main {
+            padding: 30px;
         }
     </style>
 </head>
@@ -92,7 +99,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 
     <div class="menu">
-        <?= Html::a('A Frai do Vale', ['site/index']) ?>
+        <?= Html::a('A Frai do Vale', ['site/sobre']) ?>
         <?= Html::a('Cursos', ['curso/index']) ?>
         <?= Html::a('Estude na Frai', ['site/index']) ?>
         <?= Html::a('Extensão', ['site/index']) ?>
@@ -103,8 +110,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 
     <div class="buttons">
-        <a href="#" class="btn-prof">Portal do Professor</a>
-        <a href="#" class="btn-aluno">Sou Aluno</a>
+        <?= Html::a('Portal do Professor', ['site/login'], ['class' => 'btn-prof']) ?>
+        <?= Html::a('Sou Aluno', ['site/login'], ['class' => 'btn-aluno']) ?>
     </div>
 </div>
 
