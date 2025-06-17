@@ -111,7 +111,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
     <div class="buttons">
         <?= Html::a('Portal do Professor', ['site/login'], ['class' => 'btn-prof']) ?>
-        <?= Html::a('Sou Aluno', ['site/login'], ['class' => 'btn-aluno']) ?>
+        <?= Html::a('Sou Aluno', ['site/login-aluno'], ['class' => 'btn-aluno']) ?>
     </div>
 </div>
 

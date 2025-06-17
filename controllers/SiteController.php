@@ -135,4 +135,23 @@ class SiteController extends Controller
     {
         return $this->render('sobre');
     }
+    public function actionLoginAluno()
+{
+    if (!Yii::$app->user->isGuest) {
+        return $this->goHome();
+    }
+
+    $model = new LoginForm();
+
+    if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        // Aqui você pode colocar uma verificação se é aluno
+        return $this->redirect(['site/dashboard-aluno']);
+    }
+
+    $model->password = '';
+    return $this->render('login-aluno', [
+        'model' => $model,
+    ]);
+}
+
 }
