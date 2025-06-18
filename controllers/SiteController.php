@@ -3,12 +3,13 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\CadastroForm;
 
 class SiteController extends Controller
 {
@@ -25,7 +26,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@'], // Somente usuários autenticados podem fazer logout
                     ],
                 ],
             ],
@@ -55,9 +56,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return string
+     * Página inicial.
      */
     public function actionIndex()
     {
@@ -65,9 +64,15 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
-     *
-     * @return Response|string
+     * Página Sobre (A Frai do Vale)
+     */
+    public function actionSobre()
+    {
+        return $this->render('sobre');
+    }
+
+    /**
+     * Login padrão (professor e colaborador)
      */
     public function actionLogin()
     {
@@ -87,39 +92,60 @@ class SiteController extends Controller
     }
 
     /**
-     * Logout action.
-     *
-     * @return Response
+     * Login do aluno
+     */
+    public function actionLoginAluno()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(['site/dashboard-aluno']);
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['site/dashboard-aluno']);
+        }
+
+        $model->password = '';
+        return $this->render('login-aluno', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Dashboard do aluno
+     */
+    public function actionDashboardAluno()
+    {
+        return $this->render('dashboard-aluno');
+    }
+
+    /**
+     * Logout
      */
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
     /**
-     * Displays contact page.
-     *
-     * @return Response|string
+     * Página de contato
      */
     public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Displays about page.
-     *
-     * @return string
+     * Página About padrão
      */
     public function actionAbout()
     {
@@ -127,31 +153,19 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays "A Frai do Vale" page.
-     *
-     * @return string
+     * Página de cadastro de aluno
      */
-    public function actionSobre()
+    public function actionRegistrar()
     {
-        return $this->render('sobre');
+        $model = new CadastroForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->cadastrar()) {
+            Yii::$app->session->setFlash('success', 'Cadastro realizado com sucesso! Agora você pode fazer login.');
+            return $this->redirect(['site/login-aluno']);
+        }
+
+        return $this->render('registrar', [
+            'model' => $model,
+        ]);
     }
-    public function actionLoginAluno()
-{
-    if (!Yii::$app->user->isGuest) {
-        return $this->goHome();
-    }
-
-    $model = new LoginForm();
-
-    if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        // Aqui você pode colocar uma verificação se é aluno
-        return $this->redirect(['site/dashboard-aluno']);
-    }
-
-    $model->password = '';
-    return $this->render('login-aluno', [
-        'model' => $model,
-    ]);
-}
-
 }

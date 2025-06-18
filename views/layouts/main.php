@@ -60,7 +60,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             display: flex;
             gap: 10px;
         }
-        .btn-prof, .btn-aluno {
+        .btn-prof, .btn-aluno, .btn-registrar {
             padding: 8px 14px;
             border-radius: 5px;
             color: white;
@@ -77,11 +77,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         .btn-aluno {
             background-color: #00aadd;
         }
+        .btn-registrar {
+            background-color: #28a745;
+        }
         .btn-prof:hover {
             background: linear-gradient(to right, #e57a0a, #d4470a);
         }
         .btn-aluno:hover {
             background-color: #0088aa;
+        }
+        .btn-registrar:hover {
+            background-color: #218838;
         }
         main {
             padding: 30px;
@@ -112,6 +118,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="buttons">
         <?= Html::a('Portal do Professor', ['site/login'], ['class' => 'btn-prof']) ?>
         <?= Html::a('Sou Aluno', ['site/login-aluno'], ['class' => 'btn-aluno']) ?>
+        <?= Html::a('Registrar-se', ['site/registrar'], ['class' => 'btn-registrar']) ?>
     </div>
 </div>
 

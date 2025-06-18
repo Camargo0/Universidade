@@ -29,6 +29,12 @@ $this->title = 'Login - Aluno';
 
             <?php ActiveForm::end(); ?>
 
+            <div class="mt-3">
+                <p>Não tem uma conta?
+                    <?= Html::a('Registrar-se', ['site/registrar'], ['class' => 'btn btn-success btn-sm']) ?>
+                </p>
+            </div>
+
         </div>
     </div>
 </div>
