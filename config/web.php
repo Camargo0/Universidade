@@ -57,13 +57,15 @@ $config = [
 
 // Configurações específicas para ambiente de desenvolvimento
 if (YII_ENV_DEV) {
+    // Adiciona debug e gii ao bootstrap apenas em desenvolvimento
     $config['bootstrap'][] = 'debug';
+    $config['bootstrap'][] = 'gii';
+    
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // 'allowedIPs' => ['127.0.0.1', '::1'], // descomente para limitar acesso ao debug
     ];
 
-    $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // 'allowedIPs' => ['127.0.0.1', '::1'], // descomente para limitar acesso ao gii
