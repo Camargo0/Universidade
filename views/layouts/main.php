@@ -90,6 +90,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
         .logo img {
             height: 65px;
+            width: auto;
+            max-width: 250px;
             filter: brightness(1.1) contrast(1.1);
             transition: transform 0.3s ease;
         }
@@ -555,7 +557,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!-- ===== Header Customizado ===== -->
 <div class="top-header">
     <div class="logo">
-        <?= Html::img('@web/uploads/logo.png', ['alt' => 'Frai do Vale']) ?>
+        <?= Html::img('@web/uploads/logo.svg', ['alt' => 'Frai do Vale']) ?>
     </div>
 
     <div class="menu">

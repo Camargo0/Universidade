@@ -309,7 +309,7 @@ if (!$curso) {
 
             <div class="curso-actions">
                 <?= Html::a('Voltar aos Cursos', ['curso/index'], ['class' => 'btn-voltar']) ?>
-                <?= Html::a('Matricular-se', ['curso/matricular', 'id' => $id], ['class' => 'btn-matricular']) ?>
+                <?= Html::a('Matricular-se', ['site/registrar'], ['class' => 'btn-matricular']) ?>
             </div>
         </div>
     </div>
